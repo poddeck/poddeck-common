@@ -30,7 +30,11 @@ final class EventExecutionTest {
   private class ExampleModule extends AbstractModule {
     @Override
     protected void configure() {
-      bind(Log.class).toProvider(Providers.of(null));
+      try {
+        bind(Log.class).toInstance(Log.create("Test"));
+      } catch (Exception exceptione) {
+        exceptione.printStackTrace();
+      }
     }
   }
 
