@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package agent;
+
+option java_package = "io.poddeck.common";
+option java_multiple_files = true;
+
+service HandshakeService {
+  rpc Handshake(HandshakeRequest) returns (HandshakeResponse);
+}
+
+message HandshakeRequest {
+  string key = 1;
+}
+
+message HandshakeResponse {
+  bool success = 1;
+}
