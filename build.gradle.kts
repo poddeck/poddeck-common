@@ -1,7 +1,10 @@
+import com.google.protobuf.gradle.id
+
 plugins {
   id("java")
   id("maven-publish")
   id("io.freefair.lombok") version "9.1.0"
+  id("com.google.protobuf") version "0.9.5"
 }
 
 group = "io.poddeck"
@@ -47,8 +50,38 @@ dependencies {
 
   implementation("org.apache.commons:commons-configuration2:2.12.0")
   implementation("commons-beanutils:commons-beanutils:1.11.0")
+
+  implementation("io.grpc:grpc-stub:1.76.0")
+  implementation("io.grpc:grpc-protobuf:1.76.0")
+  implementation("io.grpc:grpc-netty:1.76.0")
+  implementation("com.google.protobuf:protobuf-java:4.33.0")
 }
 
 tasks.test {
   useJUnitPlatform()
+}
+
+protobuf {
+  protoc {
+    artifact = "com.google.protobuf:protoc:4.33.0"
+  }
+  plugins {
+    id("grpc") {
+      artifact = "io.grpc:protoc-gen-grpc-java:1.76.0"
+    }
+  }
+  generateProtoTasks {
+    all().forEach {
+      it.plugins {
+        id("grpc")
+      }
+    }
+  }
+}
+
+sourceSets {
+  main {
+    java.srcDir("build/generated/source/proto/main/java")
+    java.srcDir("build/generated/source/proto/main/grpc")
+  }
 }
