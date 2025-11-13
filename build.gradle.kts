@@ -39,8 +39,6 @@ dependencies {
   testImplementation("org.junit.jupiter:junit-jupiter:6.0.1")
   testRuntimeOnly("org.junit.platform:junit-platform-launcher:6.0.1")
 
-  implementation("com.google.inject:guice:7.0.0")
-
   implementation("com.google.guava:guava:33.5.0-jre")
 
   implementation("org.projectlombok:lombok:1.18.42")

@@ -1,16 +1,12 @@
 package io.poddeck.common.event;
 
 import com.google.common.collect.Lists;
-import com.google.inject.Inject;
-import com.google.inject.Singleton;
-import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 import java.util.Optional;
 
-@Singleton
-@RequiredArgsConstructor(access = AccessLevel.PRIVATE, onConstructor = @__({@Inject}))
+@RequiredArgsConstructor(staticName = "create")
 public final class HookRegistry {
   private final List<Hook> hooks = Lists.newArrayList();
 

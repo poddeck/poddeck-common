@@ -1,14 +1,10 @@
 package io.poddeck.common.event;
 
-import com.google.inject.Inject;
-import com.google.inject.Singleton;
 import io.poddeck.common.log.Log;
-import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 
-@Singleton
-@RequiredArgsConstructor(access = AccessLevel.PRIVATE, onConstructor = @__({@Inject}))
+@RequiredArgsConstructor(staticName = "create")
 public final class EventExecutor {
   private final HookRegistry registry;
   private final Log log;

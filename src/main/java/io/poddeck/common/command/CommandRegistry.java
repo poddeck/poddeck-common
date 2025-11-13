@@ -1,17 +1,13 @@
 package io.poddeck.common.command;
 
 import com.google.common.collect.Lists;
-import com.google.inject.Inject;
-import com.google.inject.Singleton;
-import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-@Singleton
-@RequiredArgsConstructor(access = AccessLevel.PRIVATE, onConstructor = @__({@Inject}))
+@RequiredArgsConstructor(staticName = "create")
 public final class CommandRegistry {
   private final List<Command> commands = Lists.newArrayList();
 
