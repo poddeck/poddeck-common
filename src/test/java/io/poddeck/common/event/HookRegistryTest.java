@@ -1,6 +1,5 @@
 package io.poddeck.common.event;
 
-import com.google.inject.Guice;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -11,8 +10,7 @@ final class HookRegistryTest {
 
   @Test
   void testHookRegistry() {
-    var injector = Guice.createInjector();
-    var registry = injector.getInstance(HookRegistry.class);
+    var registry = HookRegistry.create();
     var hook = new ExampleHook();
     registry.register(hook);
     Assertions.assertEquals(registry.findAll().size(), 1);

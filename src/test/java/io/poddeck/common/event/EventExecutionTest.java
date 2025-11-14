@@ -1,8 +1,5 @@
 package io.poddeck.common.event;
 
-import com.google.inject.AbstractModule;
-import com.google.inject.Guice;
-import com.google.inject.util.Providers;
 import io.poddeck.common.log.Log;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -27,24 +24,13 @@ final class EventExecutionTest {
     }
   }
 
-  private class ExampleModule extends AbstractModule {
-    @Override
-    protected void configure() {
-      try {
-        bind(Log.class).toInstance(Log.create("Test"));
-      } catch (Exception exceptione) {
-        exceptione.printStackTrace();
-      }
-    }
-  }
-
   @Test
   void testEventExecution() throws Exception {
-    var injector = Guice.createInjector(new ExampleModule());
-    var registry = injector.getInstance(HookRegistry.class);
+    var registry = HookRegistry.create();
     var hook = new ExampleHook();
     registry.register(hook);
-    var executor = injector.getInstance(EventExecutor.class);
+    var log = Log.create("Test");
+    var executor = EventExecutor.create(registry, log);
     executor.executeUncaught(new ExampleEvent("Test"));
   }
 }
