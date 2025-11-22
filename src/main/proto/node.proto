@@ -1,0 +1,55 @@
+syntax = "proto3";
+
+package agent;
+
+option java_package = "io.poddeck.common";
+option java_multiple_files = true;
+
+message NodeListRequest {
+}
+
+message NodeListResponse {
+  repeated Node items = 1;
+}
+
+message Node {
+  NodeMetadata metadata = 1;
+  NodeStatus status = 2;
+}
+
+message NodeMetadata {
+  string name = 1;
+  map<string, string> labels = 2;
+  map<string, string> annotations = 3;
+}
+
+message NodeStatus {
+  repeated NodeAddress addresses = 1;
+  NodeCapacity capacity = 2;
+  NodeInfo node_info = 3;
+  NodeConditionSummary conditions = 4;
+}
+
+message NodeAddress {
+  string type = 1;
+  string address = 2;
+}
+
+message NodeCapacity {
+  string cpu = 1;
+  string memory = 2;
+  string pods = 3;
+}
+
+message NodeInfo {
+  string architecture = 1;
+  string os_image = 2;
+  string container_runtime_version = 3;
+  string kubelet_version = 4;
+  string operating_system = 5;
+}
+
+message NodeConditionSummary {
+  bool ready = 1;
+  string message = 2;
+}
