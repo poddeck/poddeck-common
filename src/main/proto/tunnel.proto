@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package agent;
+
+option java_package = "io.poddeck.common";
+option java_multiple_files = true;
+
+import "google/protobuf/any.proto";
+
+service TunnelService {
+  rpc Connect(stream TunnelMessage) returns (stream TunnelMessage);
+}
+
+message TunnelMessage {
+  string request_id = 1;
+  google.protobuf.Any payload = 2;
+}
