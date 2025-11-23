@@ -26,8 +26,8 @@ message NodeMetadata {
 message NodeStatus {
   repeated NodeAddress addresses = 1;
   NodeCapacity capacity = 2;
-  NodeInfo node_info = 3;
-  NodeConditionSummary conditions = 4;
+  NodeInfo info = 3;
+  NodeCondition condition = 4;
 }
 
 message NodeAddress {
@@ -49,7 +49,7 @@ message NodeInfo {
   string operating_system = 5;
 }
 
-message NodeConditionSummary {
-  bool ready = 1;
-  string message = 2;
+message NodeCondition {
+  bool is_ready = 1;
+  repeated string conditions = 2;
 }
