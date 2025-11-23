@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package agent;
+
+option java_package = "io.poddeck.common";
+option java_multiple_files = true;
+
+message MetricReport {
+  repeated Metric metrics = 1;
+}
+
+message Metric {
+  string node = 1;
+  int32 cpu_cores = 2;
+  double cpu_ratio = 3;
+  double total_memory = 4;
+  double used_memory = 5;
+  double memory_ratio = 6;
+  double total_storage = 7;
+  double used_storage = 8;
+  double storage_ratio = 9;
+}
