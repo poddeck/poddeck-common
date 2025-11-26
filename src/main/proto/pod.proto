@@ -1,0 +1,65 @@
+syntax = "proto3";
+
+package agent;
+
+option java_package = "io.poddeck.common";
+option java_multiple_files = true;
+
+message PodListRequest {
+}
+
+message PodListResponse {
+  repeated Pod items = 1;
+}
+
+message Pod {
+  PodMetadata metadata = 1;
+  PodSpec spec = 2;
+  PodStatus status = 3;
+}
+
+message PodMetadata {
+  string name = 1;
+  string namespace = 2;
+  map<string, string> labels = 3;
+  map<string, string> annotations = 4;
+}
+
+message PodSpec {
+  string node_name = 1;
+  repeated Container containers = 2;
+}
+
+message Container {
+  string name = 1;
+  string image = 2;
+  repeated string command = 3;
+  repeated string args = 4;
+  map<string, string> env = 5;
+}
+
+message PodStatus {
+  string phase = 1;
+  repeated PodCondition conditions = 2;
+  repeated PodContainerStatus statuses = 3;
+  string host_ip = 4;
+  string pod_ip = 5;
+  int64 age = 6;
+}
+
+message PodCondition {
+  string type = 1;
+  string status = 2;
+  string reason = 3;
+  string message = 4;
+}
+
+message PodContainerStatus {
+  string name = 1;
+  string image = 2;
+  bool ready = 3;
+  string state = 4;
+  string reason = 5;
+  string message = 6;
+  int32 restart_count = 7;
+}
