@@ -45,6 +45,7 @@ message PodStatus {
   string host_ip = 4;
   string pod_ip = 5;
   int64 age = 6;
+  string node = 7;
 }
 
 message PodCondition {
