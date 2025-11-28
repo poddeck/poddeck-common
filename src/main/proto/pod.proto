@@ -5,6 +5,15 @@ package agent;
 option java_package = "io.poddeck.common";
 option java_multiple_files = true;
 
+message PodDeleteRequest {
+  string namespace = 1;
+  string pod = 2;
+}
+
+message PodDeleteResponse {
+ bool success = 1;
+}
+
 message PodListRequest {
 }
 
