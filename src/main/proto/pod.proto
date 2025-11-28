@@ -25,6 +25,7 @@ message Pod {
   PodMetadata metadata = 1;
   PodSpec spec = 2;
   PodStatus status = 3;
+  repeated PodEvent events = 4;
 }
 
 message PodMetadata {
@@ -72,4 +73,24 @@ message PodContainerStatus {
   string reason = 5;
   string message = 6;
   int32 restart_count = 7;
+}
+
+message PodEvent {
+  string type = 1;
+  string reason = 2;
+  string message = 3;
+  int64 timestamp = 4;
+  string source = 5;
+}
+
+message PodLogRequest {
+  string namespace = 1;
+  string pod = 2;
+  string container = 3;
+  int32 tail_lines = 4;
+  int32 since_seconds = 5;
+}
+
+message PodLogResponse {
+  string logs = 1;
 }
