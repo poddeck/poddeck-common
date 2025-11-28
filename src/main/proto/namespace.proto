@@ -5,6 +5,22 @@ package agent;
 option java_package = "io.poddeck.common";
 option java_multiple_files = true;
 
+message NamespaceCreateRequest {
+  string name = 1;
+}
+
+message NamespaceCreateResponse {
+  bool success = 1;
+}
+
+message NamespaceDeleteRequest {
+  string name = 1;
+}
+
+message NamespaceDeleteResponse {
+  bool success = 1;
+}
+
 message NamespaceListRequest {
 }
 
