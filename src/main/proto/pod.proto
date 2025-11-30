@@ -5,20 +5,21 @@ package agent;
 option java_package = "io.poddeck.common";
 option java_multiple_files = true;
 
-message PodDeleteRequest {
-  string namespace = 1;
-  string pod = 2;
-}
-
-message PodDeleteResponse {
- bool success = 1;
-}
-
 message PodListRequest {
 }
 
 message PodListResponse {
   repeated Pod items = 1;
+}
+
+message PodFindRequest {
+  string namespace = 1;
+  string pod = 2;
+}
+
+message PodFindResponse {
+  bool success = 1;
+  Pod pod = 2;
 }
 
 message Pod {
@@ -83,11 +84,19 @@ message PodEvent {
   string source = 5;
 }
 
+message PodDeleteRequest {
+  string namespace = 1;
+  string pod = 2;
+}
+
+message PodDeleteResponse {
+ bool success = 1;
+}
+
 message PodLogRequest {
   string namespace = 1;
   string pod = 2;
   string container = 3;
-  int32 tail_lines = 4;
   int32 since_seconds = 5;
 }
 
