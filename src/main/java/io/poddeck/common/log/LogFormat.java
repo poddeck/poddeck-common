@@ -34,7 +34,8 @@ public final class LogFormat extends Formatter {
 
   @Override
   public String format(LogRecord record) {
-    var result = new StringBuilder("\r");
+    var tty = System.console() != null;
+    var result = new StringBuilder(tty ? "\r" : "");
     if (formatType.isConsole()) {
       result.append(determineColor(record));
     }
@@ -43,11 +44,7 @@ public final class LogFormat extends Formatter {
     if (formatType.isConsole()) {
       result.append(COLOR_RESET);
     }
-    if (formatType.isConsole()) {
-      result.append("\n");
-      result.append(COLOR_WHITE);
-      result.append(" > ");
-    }
+    result.append("\n");
     return result.toString();
   }
 
@@ -61,7 +58,7 @@ public final class LogFormat extends Formatter {
     if (record.getLevel() == Level.FINE) {
       return COLOR_CYAN;
     }
-    return COLOR_WHITE;
+    return "";
   }
 
   private String buildPrefix(LogRecord record) {
