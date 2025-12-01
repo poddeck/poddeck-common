@@ -1,0 +1,89 @@
+syntax = "proto3";
+
+package agent;
+
+option java_package = "io.poddeck.common";
+option java_multiple_files = true;
+
+import "pod.proto";
+
+message DeploymentListRequest {
+}
+
+message DeploymentListResponse {
+  repeated Deployment items = 1;
+}
+
+message DeploymentFindRequest {
+  string namespace = 1;
+  string deployment = 2;
+}
+
+message DeploymentFindResponse {
+  bool success = 1;
+  Deployment deployment = 2;
+}
+
+message Deployment {
+  DeploymentMetadata metadata = 1;
+  DeploymentSpec spec = 2;
+  DeploymentStatus status = 3;
+  repeated DeploymentEvent events = 4;
+}
+
+message DeploymentMetadata {
+  string name = 1;
+  string namespace = 2;
+  map<string, string> labels = 3;
+  map<string, string> annotations = 4;
+}
+
+message DeploymentSpec {
+  int32 replicas = 1;
+  DeploymentSelector selector = 2;
+  PodTemplate template = 3;
+}
+
+message DeploymentSelector {
+  map<string, string> match_labels = 1;
+}
+
+message PodTemplate {
+  PodMetadata metadata = 1;
+  PodSpec spec = 2;
+}
+
+message DeploymentStatus {
+  int32 replicas = 1;
+  int32 updated_replicas = 2;
+  int32 ready_replicas = 3;
+  int32 available_replicas = 4;
+  int32 unavailable_replicas = 5;
+  string updated_revision = 6;
+  string current_revision = 7;
+  int64 age = 8;
+}
+
+message DeploymentCondition {
+  string type = 1;
+  string status = 2;
+  string reason = 3;
+  string message = 4;
+}
+
+message DeploymentEvent {
+  string type = 1;
+  string reason = 2;
+  string message = 3;
+  int64 timestamp = 4;
+  string source = 5;
+}
+
+message DeploymentDeleteRequest {
+  string namespace = 1;
+  string deployment = 2;
+}
+
+message DeploymentDeleteResponse {
+  bool success = 1;
+}
