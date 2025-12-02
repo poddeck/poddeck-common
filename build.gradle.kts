@@ -52,7 +52,7 @@ dependencies {
   implementation("io.grpc:grpc-stub:1.77.0")
   implementation("io.grpc:grpc-protobuf:1.77.0")
   implementation("io.grpc:grpc-netty:1.77.0")
-  implementation("com.google.protobuf:protobuf-java:4.33.0")
+  implementation("com.google.protobuf:protobuf-java:4.33.1")
 }
 
 tasks.test {
@@ -61,7 +61,7 @@ tasks.test {
 
 protobuf {
   protoc {
-    artifact = "com.google.protobuf:protoc:4.33.0"
+    artifact = "com.google.protobuf:protoc:4.33.1"
   }
   plugins {
     id("grpc") {
