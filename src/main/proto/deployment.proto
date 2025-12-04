@@ -29,6 +29,7 @@ message Deployment {
   DeploymentSpec spec = 2;
   DeploymentStatus status = 3;
   repeated DeploymentEvent events = 4;
+  string raw = 5;
 }
 
 message DeploymentMetadata {
@@ -86,5 +87,25 @@ message DeploymentDeleteRequest {
 }
 
 message DeploymentDeleteResponse {
+  bool success = 1;
+}
+
+message DeploymentScaleRequest {
+  string namespace = 1;
+  string deployment = 2;
+  int32 replicas = 3;
+}
+
+message DeploymentScaleResponse {
+  bool success = 1;
+}
+
+message DeploymentEditRequest {
+  string namespace = 1;
+  string deployment = 2;
+  string raw = 3;
+}
+
+message DeploymentEditResponse {
   bool success = 1;
 }
