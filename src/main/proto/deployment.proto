@@ -71,6 +71,7 @@ message DeploymentCondition {
   string status = 2;
   string reason = 3;
   string message = 4;
+  int64 last_update = 5;
 }
 
 message DeploymentEvent {
