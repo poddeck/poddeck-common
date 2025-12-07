@@ -64,6 +64,7 @@ message DeploymentStatus {
   string current_revision = 7;
   int64 age = 8;
   repeated DeploymentCondition conditions = 9;
+  string replica_set = 10;
 }
 
 message DeploymentCondition {
