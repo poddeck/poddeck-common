@@ -83,6 +83,16 @@ message DeploymentEvent {
   string source = 5;
 }
 
+message DeploymentCreateRequest {
+  string raw = 1;
+}
+
+message DeploymentCreateResponse {
+  bool success = 1;
+  string namespace = 2;
+  string deployment = 3;
+}
+
 message DeploymentDeleteRequest {
   string namespace = 1;
   string deployment = 2;
