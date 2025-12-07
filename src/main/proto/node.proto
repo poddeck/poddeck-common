@@ -36,9 +36,10 @@ message NodeAddress {
 }
 
 message NodeCapacity {
-  string cpu = 1;
-  string memory = 2;
-  string pods = 3;
+  int64 total_cpu = 1;
+  int64 total_memory = 2;
+  int64 allocated_cpu = 3;
+  int64 allocated_memory = 4;
 }
 
 message NodeInfo {

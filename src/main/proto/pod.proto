@@ -48,6 +48,14 @@ message Container {
   repeated string command = 3;
   repeated string args = 4;
   map<string, string> env = 5;
+  ResourceRequirements resources = 6;
+}
+
+message ResourceRequirements {
+  int64 cpu_request = 1;
+  int64 cpu_limit = 2;
+  int64 memory_request = 3;
+  int64 memory_limit = 4;
 }
 
 message PodStatus {
