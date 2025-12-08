@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package agent;
+
+option java_package = "io.poddeck.common";
+option java_multiple_files = true;
+
+message EventReport {
+  Event event = 1;
+}
+
+message Event {
+  string name = 1;
+  string namespace = 2;
+  string reason = 3;
+  string message = 4;
+  string type = 5;
+  string involved_object_kind = 6;
+  string involved_object_name = 7;
+  int64 first_timestamp = 8;
+  int64 last_timestamp = 9;
+  int32 count = 10;
+}
