@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package agent;
+
+option java_package = "io.poddeck.common";
+option java_multiple_files = true;
+
+message ResourceCreateRequest {
+  string raw = 1;
+}
+
+message ResourceCreateResponse {
+  bool success = 1;
+}
