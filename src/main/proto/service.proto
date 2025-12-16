@@ -1,0 +1,104 @@
+syntax = "proto3";
+
+package agent;
+
+option java_package = "io.poddeck.common";
+option java_multiple_files = true;
+
+import "pod.proto";
+
+message ServiceListRequest {
+}
+
+message ServiceListResponse {
+  repeated Service items = 1;
+}
+
+message ServiceFindRequest {
+  string namespace = 1;
+  string service = 2;
+}
+
+message ServiceFindResponse {
+  bool success = 1;
+  Service service = 2;
+}
+
+message Service {
+  ServiceMetadata metadata = 1;
+  ServiceSpec spec = 2;
+  ServiceStatus status = 3;
+  repeated ServiceEvent events = 4;
+  string raw = 5;
+}
+
+message ServiceMetadata {
+  string name = 1;
+  string namespace = 2;
+  map<string, string> labels = 3;
+  map<string, string> annotations = 4;
+}
+
+message ServiceSpec {
+  string type = 1;
+  map<string, string> selector = 2;
+  repeated ServicePort ports = 3;
+  string cluster_ip = 4;
+  repeated string cluster_ips = 5;
+  string ip_family_policy = 6;
+  repeated string ip_families = 7;
+  string session_affinity = 8;
+  string internal_traffic_policy = 9;
+  string external_traffic_policy = 10;
+}
+
+message ServicePort {
+  string name = 1;
+  int32 port = 2;
+  string protocol = 3;
+  string target_port = 4;
+  int32 node_port = 5;
+}
+
+message ServiceStatus {
+  repeated LoadBalancerIngress load_balancer = 1;
+  repeated ServiceEndpoint endpoints = 2;
+  int64 age = 3;
+}
+
+message LoadBalancerIngress {
+  string ip = 1;
+  string hostname = 2;
+}
+
+message ServiceEndpoint {
+  string ip = 1;
+  int32 port = 2;
+}
+
+message ServiceEvent {
+  string type = 1;
+  string reason = 2;
+  string message = 3;
+  int64 timestamp = 4;
+  string source = 5;
+}
+
+message ServiceCreateRequest {
+  string raw = 1;
+}
+
+message ServiceCreateResponse {
+  bool success = 1;
+  string namespace = 2;
+  string service = 3;
+}
+
+message ServiceDeleteRequest {
+  string namespace = 1;
+  string service = 2;
+}
+
+message ServiceDeleteResponse {
+  bool success = 1;
+}
