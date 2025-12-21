@@ -12,6 +12,15 @@ message NodeListResponse {
   repeated Node items = 1;
 }
 
+message NodeFindRequest {
+  string name = 1;
+}
+
+message NodeFindResponse {
+  bool success = 1;
+  Node node = 2;
+}
+
 message Node {
   NodeMetadata metadata = 1;
   NodeStatus status = 2;
