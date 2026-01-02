@@ -1,0 +1,160 @@
+syntax = "proto3";
+
+package agent;
+
+option java_package = "io.poddeck.common";
+option java_multiple_files = true;
+
+import "pod.proto";
+
+message StatefulSetListRequest {
+}
+
+message StatefulSetListResponse {
+  repeated StatefulSet items = 1;
+}
+
+message StatefulSetFindRequest {
+  string namespace = 1;
+  string stateful_set = 2;
+}
+
+message StatefulSetFindResponse {
+  bool success = 1;
+  StatefulSet stateful_set = 2;
+}
+
+message StatefulSet {
+  StatefulSetMetadata metadata = 1;
+  StatefulSetSpec spec = 2;
+  StatefulSetStatus status = 3;
+  repeated StatefulSetEvent events = 4;
+  string raw = 5;
+}
+
+message StatefulSetMetadata {
+  string name = 1;
+  string namespace = 2;
+  map<string, string> labels = 3;
+  map<string, string> annotations = 4;
+}
+
+message StatefulSetSpec {
+  int32 replicas = 1;
+  StatefulSetSelector selector = 2;
+  PodTemplate template = 3;
+  string service_name = 4;
+  string pod_management_policy = 5;
+  StatefulSetUpdateStrategy update_strategy = 6;
+  int32 revision_history_limit = 7;
+  repeated PersistentVolumeClaim volume_claim_templates = 8;
+}
+
+message StatefulSetSelector {
+  map<string, string> match_labels = 1;
+}
+
+message StatefulSetUpdateStrategy {
+  string type = 1;
+  RollingUpdateStatefulSetStrategy rolling_update = 2;
+}
+
+message RollingUpdateStatefulSetStrategy {
+  int32 partition = 1;
+  int32 max_unavailable = 2;
+}
+
+message PersistentVolumeClaim {
+  string name = 1;
+  PersistentVolumeClaimSpec spec = 2;
+}
+
+message PersistentVolumeClaimSpec {
+  repeated string access_modes = 1;
+  PersistentVolumeResources resources = 2;
+  string storage_class_name = 3;
+  string volume_mode = 4;
+}
+
+message PersistentVolumeResources {
+  map<string, string> requests = 1;
+  map<string, string> limits = 2;
+}
+
+message StatefulSetStatus {
+  int32 replicas = 1;
+  int32 ready_replicas = 2;
+  int32 current_replicas = 3;
+  int32 updated_replicas = 4;
+  int32 available_replicas = 5;
+  string current_revision = 6;
+  string update_revision = 7;
+  int64 age = 8;
+  repeated StatefulSetCondition conditions = 9;
+  int32 collision_count = 10;
+  int64 observed_generation = 11;
+}
+
+message StatefulSetCondition {
+  string type = 1;
+  string status = 2;
+  string reason = 3;
+  string message = 4;
+  int64 last_transition_time = 5;
+}
+
+message StatefulSetEvent {
+  string type = 1;
+  string reason = 2;
+  string message = 3;
+  int64 timestamp = 4;
+  string source = 5;
+}
+
+message StatefulSetCreateRequest {
+  string raw = 1;
+}
+
+message StatefulSetCreateResponse {
+  bool success = 1;
+  string namespace = 2;
+  string stateful_set = 3;
+}
+
+message StatefulSetDeleteRequest {
+  string namespace = 1;
+  string stateful_set = 2;
+}
+
+message StatefulSetDeleteResponse {
+  bool success = 1;
+}
+
+message StatefulSetScaleRequest {
+  string namespace = 1;
+  string stateful_set = 2;
+  int32 replicas = 3;
+}
+
+message StatefulSetScaleResponse {
+  bool success = 1;
+}
+
+message StatefulSetRestartRequest {
+  string namespace = 1;
+  string stateful_set = 2;
+}
+
+message StatefulSetRestartResponse {
+  bool success = 1;
+}
+
+message StatefulSetEditRequest {
+  string namespace = 1;
+  string stateful_set = 2;
+  string raw = 3;
+}
+
+message StatefulSetEditResponse {
+  bool success = 1;
+}
