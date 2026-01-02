@@ -1,0 +1,126 @@
+syntax = "proto3";
+
+package agent;
+
+option java_package = "io.poddeck.common";
+option java_multiple_files = true;
+
+import "pod.proto";
+
+message ReplicaSetListRequest {
+}
+
+message ReplicaSetListResponse {
+  repeated ReplicaSet items = 1;
+}
+
+message ReplicaSetFindRequest {
+  string namespace = 1;
+  string replica_set = 2;
+}
+
+message ReplicaSetFindResponse {
+  bool success = 1;
+  ReplicaSet replica_set = 2;
+}
+
+message ReplicaSet {
+  ReplicaSetMetadata metadata = 1;
+  ReplicaSetSpec spec = 2;
+  ReplicaSetStatus status = 3;
+  repeated ReplicaSetEvent events = 4;
+  string raw = 5;
+}
+
+message ReplicaSetMetadata {
+  string name = 1;
+  string namespace = 2;
+  map<string, string> labels = 3;
+  map<string, string> annotations = 4;
+  repeated OwnerReference owner_references = 5;
+}
+
+message OwnerReference {
+  string api_version = 1;
+  string kind = 2;
+  string name = 3;
+  string uid = 4;
+  bool controller = 5;
+  bool block_owner_deletion = 6;
+}
+
+message ReplicaSetSpec {
+  int32 replicas = 1;
+  ReplicaSetSelector selector = 2;
+  PodTemplate template = 3;
+  int32 min_ready_seconds = 4;
+}
+
+message ReplicaSetSelector {
+  map<string, string> match_labels = 1;
+}
+
+message ReplicaSetStatus {
+  int32 replicas = 1;
+  int32 fully_labeled_replicas = 2;
+  int32 ready_replicas = 3;
+  int32 available_replicas = 4;
+  int32 observed_generation = 5;
+  int64 age = 6;
+  repeated ReplicaSetCondition conditions = 7;
+}
+
+message ReplicaSetCondition {
+  string type = 1;
+  string status = 2;
+  string reason = 3;
+  string message = 4;
+  int64 last_transition_time = 5;
+}
+
+message ReplicaSetEvent {
+  string type = 1;
+  string reason = 2;
+  string message = 3;
+  int64 timestamp = 4;
+  string source = 5;
+}
+
+message ReplicaSetCreateRequest {
+  string raw = 1;
+}
+
+message ReplicaSetCreateResponse {
+  bool success = 1;
+  string namespace = 2;
+  string replica_set = 3;
+}
+
+message ReplicaSetDeleteRequest {
+  string namespace = 1;
+  string replica_set = 2;
+}
+
+message ReplicaSetDeleteResponse {
+  bool success = 1;
+}
+
+message ReplicaSetScaleRequest {
+  string namespace = 1;
+  string replica_set = 2;
+  int32 replicas = 3;
+}
+
+message ReplicaSetScaleResponse {
+  bool success = 1;
+}
+
+message ReplicaSetEditRequest {
+  string namespace = 1;
+  string replica_set = 2;
+  string raw = 3;
+}
+
+message ReplicaSetEditResponse {
+  bool success = 1;
+}
