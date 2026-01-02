@@ -1,0 +1,130 @@
+syntax = "proto3";
+
+package agent;
+
+option java_package = "io.poddeck.common";
+option java_multiple_files = true;
+
+import "pod.proto";
+
+message DaemonSetListRequest {
+}
+
+message DaemonSetListResponse {
+  repeated DaemonSet items = 1;
+}
+
+message DaemonSetFindRequest {
+  string namespace = 1;
+  string daemon_set = 2;
+}
+
+message DaemonSetFindResponse {
+  bool success = 1;
+  DaemonSet daemon_set = 2;
+}
+
+message DaemonSet {
+  DaemonSetMetadata metadata = 1;
+  DaemonSetSpec spec = 2;
+  DaemonSetStatus status = 3;
+  repeated DaemonSetEvent events = 4;
+  string raw = 5;
+}
+
+message DaemonSetMetadata {
+  string name = 1;
+  string namespace = 2;
+  map<string, string> labels = 3;
+  map<string, string> annotations = 4;
+}
+
+message DaemonSetSpec {
+  DaemonSetSelector selector = 1;
+  PodTemplate template = 2;
+  DaemonSetUpdateStrategy update_strategy = 3;
+  int32 min_ready_seconds = 4;
+  int32 revision_history_limit = 5;
+}
+
+message DaemonSetSelector {
+  map<string, string> match_labels = 1;
+}
+
+message DaemonSetUpdateStrategy {
+  string type = 1;
+  DaemonSetRollingUpdate rolling_update = 2;
+}
+
+message DaemonSetRollingUpdate {
+  int32 max_unavailable = 1;
+  int32 max_surge = 2;
+}
+
+message DaemonSetStatus {
+  int32 current_number_scheduled = 1;
+  int32 number_misscheduled = 2;
+  int32 desired_number_scheduled = 3;
+  int32 number_ready = 4;
+  int32 updated_number_scheduled = 5;
+  int32 number_available = 6;
+  int32 number_unavailable = 7;
+  int64 age = 8;
+  string updated_revision = 9;
+  string current_revision = 10;
+  repeated DaemonSetCondition conditions = 11;
+}
+
+message DaemonSetCondition {
+  string type = 1;
+  string status = 2;
+  string reason = 3;
+  string message = 4;
+  int64 last_update = 5;
+}
+
+message DaemonSetEvent {
+  string type = 1;
+  string reason = 2;
+  string message = 3;
+  int64 timestamp = 4;
+  string source = 5;
+}
+
+message DaemonSetCreateRequest {
+  string raw = 1;
+}
+
+message DaemonSetCreateResponse {
+  bool success = 1;
+  string namespace = 2;
+  string daemon_set = 3;
+}
+
+message DaemonSetDeleteRequest {
+  string namespace = 1;
+  string daemon_set = 2;
+}
+
+message DaemonSetDeleteResponse {
+  bool success = 1;
+}
+
+message DaemonSetRestartRequest {
+  string namespace = 1;
+  string daemon_set = 2;
+}
+
+message DaemonSetRestartResponse {
+  bool success = 1;
+}
+
+message DaemonSetEditRequest {
+  string namespace = 1;
+  string daemon_set = 2;
+  string raw = 3;
+}
+
+message DaemonSetEditResponse {
+  bool success = 1;
+}

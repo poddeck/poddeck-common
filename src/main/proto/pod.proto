@@ -29,6 +29,11 @@ message Pod {
   repeated PodEvent events = 4;
 }
 
+message PodTemplate {
+  PodMetadata metadata = 1;
+  PodSpec spec = 2;
+}
+
 message PodMetadata {
   string name = 1;
   string namespace = 2;

@@ -49,11 +49,6 @@ message DeploymentSelector {
   map<string, string> match_labels = 1;
 }
 
-message PodTemplate {
-  PodMetadata metadata = 1;
-  PodSpec spec = 2;
-}
-
 message DeploymentStatus {
   int32 replicas = 1;
   int32 updated_replicas = 2;
