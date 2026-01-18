@@ -1,0 +1,114 @@
+syntax = "proto3";
+
+package agent;
+
+option java_package = "io.poddeck.common";
+option java_multiple_files = true;
+
+import "pod.proto";
+
+message CronJobListRequest {
+}
+
+message CronJobListResponse {
+  repeated CronJob items = 1;
+}
+
+message CronJobFindRequest {
+  string namespace = 1;
+  string cron_job = 2;
+}
+
+message CronJobFindResponse {
+  bool success = 1;
+  CronJob cron_job = 2;
+}
+
+message CronJob {
+  CronJobMetadata metadata = 1;
+  CronJobSpec spec = 2;
+  CronJobStatus status = 3;
+  repeated CronJobEvent events = 4;
+  string raw = 5;
+}
+
+message CronJobMetadata {
+  string name = 1;
+  string namespace = 2;
+  map<string, string> labels = 3;
+  map<string, string> annotations = 4;
+}
+
+message CronJobSpec {
+  string schedule = 1;
+  string time_zone = 2;
+  bool suspend = 3;
+  string concurrency_policy = 4;
+  int32 successful_jobs_history_limit = 5;
+  int32 failed_jobs_history_limit = 6;
+  CronJobJobTemplate job_template = 7;
+}
+
+message CronJobJobTemplate {
+  CronJobJobSpec spec = 1;
+}
+
+message CronJobJobSpec {
+  int32 backoff_limit = 1;
+  int64 active_deadline_seconds = 2;
+  PodTemplate template = 3;
+}
+
+message CronJobStatus {
+  int64 active = 1;
+  int64 last_schedule_time = 2;
+  int64 last_successful_time = 3;
+  int64 age = 4;
+}
+
+message CronJobEvent {
+  string type = 1;
+  string reason = 2;
+  string message = 3;
+  int64 timestamp = 4;
+  string source = 5;
+}
+
+message CronJobCreateRequest {
+  string raw = 1;
+}
+
+message CronJobCreateResponse {
+  bool success = 1;
+  string namespace = 2;
+  string cron_job = 3;
+}
+
+message CronJobDeleteRequest {
+  string namespace = 1;
+  string cron_job = 2;
+}
+
+message CronJobDeleteResponse {
+  bool success = 1;
+}
+
+message CronJobSuspendRequest {
+  string namespace = 1;
+  string cron_job = 2;
+  bool suspend = 3;
+}
+
+message CronJobSuspendResponse {
+  bool success = 1;
+}
+
+message CronJobEditRequest {
+  string namespace = 1;
+  string cron_job = 2;
+  string raw = 3;
+}
+
+message CronJobEditResponse {
+  bool success = 1;
+}
