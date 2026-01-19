@@ -103,6 +103,15 @@ message CronJobSuspendResponse {
   bool success = 1;
 }
 
+message CronJobRunRequest {
+  string namespace = 1;
+  string cron_job = 2;
+}
+
+message CronJobRunResponse {
+  bool success = 1;
+}
+
 message CronJobEditRequest {
   string namespace = 1;
   string cron_job = 2;
