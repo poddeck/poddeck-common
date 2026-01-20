@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package agent;
+
+option java_package = "io.poddeck.common";
+option java_multiple_files = true;
+
+message AuditPerformRequest {
+}
+
+message AuditPerformResponse {
+  bool success = 1;
+}
+
+message AuditCancelRequest {
+}
+
+message AuditCancelResponse {
+  bool success = 1;
+}
+
+message Audit {
+  int64 time = 1;
+  string raw = 2;
+}
