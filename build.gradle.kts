@@ -3,7 +3,7 @@ import com.google.protobuf.gradle.id
 plugins {
   id("java")
   id("maven-publish")
-  id("io.freefair.lombok") version "9.1.0"
+  id("io.freefair.lombok") version "9.2.0"
   id("com.google.protobuf") version "0.9.6"
 }
 
