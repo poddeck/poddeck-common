@@ -10,16 +10,61 @@ message AuditPerformRequest {
 
 message AuditPerformResponse {
   bool success = 1;
+  Audit audit = 2;
 }
 
-message AuditCancelRequest {
+message AuditFindRequest {
 }
 
-message AuditCancelResponse {
+message AuditFindResponse {
   bool success = 1;
+  Audit audit = 2;
 }
 
 message Audit {
-  int64 time = 1;
-  string raw = 2;
+  string raw = 1;
+  repeated AuditControl controls = 2;
+  AuditTotals totals = 3;
+}
+
+message AuditControl {
+  string id = 1;
+  string version = 2;
+  string detected_version = 3;
+  string text = 4;
+  string node_type = 5;
+  repeated AuditTest tests = 6;
+  AuditTotals totals = 7;
+}
+
+message AuditTest {
+  string section = 1;
+  string type = 2;
+  string description = 3;
+  repeated AuditResult results = 4;
+  AuditTotals totals = 5;
+}
+
+message AuditResult {
+  string test_number = 1;
+  string test_description = 2;
+  string audit = 3;
+  string audit_env = 4;
+  string audit_config = 5;
+  string type = 6;
+  string remediation = 7;
+  string test_info = 8;
+  string status = 9;
+  string actual_value = 10;
+  string scored = 11;
+  bool is_multiple = 12;
+  string expected_result = 13;
+  string reason = 14;
+}
+
+message AuditTotals {
+  int32 total_pass = 1;
+  int32 total_fail = 2;
+  int32 total_warn = 3;
+  int32 total_info = 4;
 }
