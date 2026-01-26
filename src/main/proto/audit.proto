@@ -25,6 +25,7 @@ message Audit {
   string raw = 1;
   repeated AuditControl controls = 2;
   AuditTotals totals = 3;
+  int64 time = 4;
 }
 
 message AuditControl {
