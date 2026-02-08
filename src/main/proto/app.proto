@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+package app;
+
+option java_package = "io.poddeck.common";
+option java_multiple_files = true;
+
+message AppInstallRequest {
+  string name = 1;
+  string chart = 2;
+  string namespace = 3;
+  map<string, string> values = 4;
+  string version = 5;
+}
+
+message AppInstallResponse {
+  bool success = 1;
+  string status = 2;
+  string output = 3;
+}
+
+message AppUninstallRequest {
+  string chart = 1;
+}
+
+message AppUninstallResponse {
+  bool success = 1;
+}
+
+message AppListRequest {
+}
+
+message AppListResponse {
+  bool success = 1;
+  repeated App apps = 2;
+}
+
+message AppFindRequest {
+  string name = 1;
+}
+
+message AppFindResponse {
+  bool success = 1;
+  App app = 2;
+}
+
+message App {
+  string repository = 1;
+  string name = 2;
+  repeated AppVersion versions = 3;
+  string description = 4;
+  repeated string keywords = 5;
+  bool installed = 6;
+}
+
+message AppVersion {
+  string chart_version = 1;
+  string app_version = 2;
+}
