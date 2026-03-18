@@ -41,10 +41,10 @@ dependencies {
 
   implementation("com.google.guava:guava:33.5.0-jre")
 
-  implementation("org.projectlombok:lombok:1.18.42")
-  annotationProcessor("org.projectlombok:lombok:1.18.42")
-  testImplementation("org.projectlombok:lombok:1.18.42")
-  testAnnotationProcessor("org.projectlombok:lombok:1.18.42")
+  implementation("org.projectlombok:lombok:1.18.44")
+  annotationProcessor("org.projectlombok:lombok:1.18.44")
+  testImplementation("org.projectlombok:lombok:1.18.44")
+  testAnnotationProcessor("org.projectlombok:lombok:1.18.44")
 
   implementation("org.apache.commons:commons-configuration2:2.13.0")
   implementation("commons-beanutils:commons-beanutils:1.11.0")
