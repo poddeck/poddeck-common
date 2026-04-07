@@ -20,7 +20,8 @@ message AppInstallResponse {
 }
 
 message AppUninstallRequest {
-  string chart = 1;
+  string name = 1;
+  string namespace = 2;
 }
 
 message AppUninstallResponse {
