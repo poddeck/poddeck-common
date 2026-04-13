@@ -46,7 +46,7 @@ dependencies {
   testImplementation("org.projectlombok:lombok:1.18.44")
   testAnnotationProcessor("org.projectlombok:lombok:1.18.44")
 
-  implementation("org.apache.commons:commons-configuration2:2.13.0")
+  implementation("org.apache.commons:commons-configuration2:2.14.0")
   implementation("commons-beanutils:commons-beanutils:1.11.0")
 
   implementation("io.grpc:grpc-stub:1.80.0")
