@@ -49,9 +49,9 @@ dependencies {
   implementation("org.apache.commons:commons-configuration2:2.15.1")
   implementation("commons-beanutils:commons-beanutils:1.11.0")
 
-  implementation("io.grpc:grpc-stub:1.83.0")
-  implementation("io.grpc:grpc-protobuf:1.83.0")
-  implementation("io.grpc:grpc-netty:1.83.0")
+  implementation("io.grpc:grpc-stub:1.83.1")
+  implementation("io.grpc:grpc-protobuf:1.83.1")
+  implementation("io.grpc:grpc-netty:1.83.1")
   implementation("com.google.protobuf:protobuf-java:4.35.1")
 }
 
@@ -65,7 +65,7 @@ protobuf {
   }
   plugins {
     id("grpc") {
-      artifact = "io.grpc:protoc-gen-grpc-java:1.83.0"
+      artifact = "io.grpc:protoc-gen-grpc-java:1.83.1"
     }
   }
   generateProtoTasks {
