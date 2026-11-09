@@ -4,7 +4,7 @@ plugins {
   id("java")
   id("maven-publish")
   id("io.freefair.lombok") version "9.8.3"
-  id("com.google.protobuf") version "0.10.0"
+  id("com.google.protobuf") version "0.10.1"
 }
 
 group = "io.poddeck"
